@@ -5,6 +5,7 @@ const mainText = document.querySelector(".display__main-text");
 
 const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
+const cancelButton = document.querySelector(".cancel");
 const equalButton = document.querySelector(".equal");
 const expressionElements = document.querySelectorAll(".expression-element");
 
@@ -20,6 +21,24 @@ deleteButton.onclick = (e) => {
       0,
       mathExpression.length - 1
     );
+  }
+};
+
+cancelButton.onclick = (e) => {
+  const exp = lastText.textContent;
+
+  //split com regex
+  let splitIndex = -1;
+  for (let i = exp.length - 1; i >= 0; i--) {
+    if (isNaN(exp[i])) {
+      splitIndex = i;
+      break;
+    }
+  }
+
+  if (splitIndex > -1) {
+    mainText.textContent = exp.substring(0, splitIndex);
+    lastText.textContent = "";
   }
 };
 
@@ -70,12 +89,3 @@ for (const element of expressionElements) {
 
 //   mainText.text;
 // };
-
-// const handleClick = function (e) {
-//   const btnText = e.target.textContent;
-//   buttonMapping(btnText);
-// };
-
-// for (const btn of btnNodes) {
-//   btn.onclick = handleClick;
-// }
